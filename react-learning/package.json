@@ -21,7 +21,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "http://tenpappy.github.io/react-learning",
+  "homepage": "https://tenpappy.github.io/react-learning",
   "eslintConfig": {
     "extends": [
       "react-app",
