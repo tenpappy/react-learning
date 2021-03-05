@@ -37,12 +37,12 @@ export const Top = () => {
   //作品リスト
   const worksList = {
     work1: {
-      path: "/Practice",
+      path: "/react-learning/Practice",
       name: "練習アプリ",
       description: ["練習用の画面です"],
     },
     work2: {
-      path: "/Calculator",
+      path: "/react-learning/Calculator",
       name: "電卓アプリ",
       description: ["シンプルな電卓アプリです。四則演算ができます。"],
     },
