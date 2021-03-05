@@ -1,0 +1,6 @@
+.boxSelector :hover {
+  background-color: #00cc00;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+}
