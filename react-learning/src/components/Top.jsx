@@ -30,6 +30,11 @@ const lync = {
   textDecoration: "none",
 };
 
+//pタグ（改行反映）
+const description = {
+  whiteSpace: "pre-wrap",
+};
+
 /**
  *メイン
  */
@@ -44,7 +49,7 @@ export const Top = () => {
     work2: {
       path: "/react-learning/Calculator",
       name: "電卓アプリ",
-      description: ["シンプルな電卓アプリです。四則演算ができます。"],
+      description: ["シンプルな電卓アプリです。\n四則演算ができます。"],
     },
   };
 
@@ -77,7 +82,7 @@ export const Top = () => {
               {worksList[key].name}
             </Link>
           </div>
-          <p>{worksList[key].description}</p>
+          <p style={description}>{worksList[key].description}</p>
         </div>
       ))}
     </>
