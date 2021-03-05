@@ -48,7 +48,7 @@ export const Top = () => {
     },
     work2: {
       path: "/react-learning/Calculator",
-      name: "電卓アプリ",
+      name: "電卓アプリ（作成中）",
       description: ["シンプルな電卓アプリです。\n四則演算ができます。"],
     },
   };
