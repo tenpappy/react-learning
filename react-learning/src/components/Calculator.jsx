@@ -93,7 +93,6 @@ export const Calculator = () => {
           disableElevation
           className={classes.button}
           onClick={onClickNum}
-          // disabled={disabled}
         >
           7
         </Button>
