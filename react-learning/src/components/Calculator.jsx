@@ -73,7 +73,15 @@ export const Calculator = () => {
   };
   return (
     <>
-      <h1>電卓アプリ（作成中）ボタンクリック後に値を渡すところまで完了</h1>
+      <h1>電卓アプリ（作成中）</h1>
+      <ul>
+        <li>Reactで実装</li>
+        <li>ボタンだけMaterial-UI使ってみた</li>
+        <li>ボタンクリック後に値を渡すところまで完了</li>
+        <li>
+          全てを一旦文字列で受け取ってあとで計算するのが不可（eval使用不可）だったため、別の方法検討中
+        </li>
+      </ul>
       <div style={outputArea}>{outputMessage}</div>
       <div style={flex}>
         <Button
