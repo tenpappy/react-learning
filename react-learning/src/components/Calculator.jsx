@@ -73,7 +73,7 @@ export const Calculator = () => {
   };
   return (
     <>
-      <h1>電卓アプリ</h1>
+      <h1>電卓アプリ（作成中）</h1>
       <div style={outputArea}>{outputMessage}</div>
       <div style={flex}>
         <Button
