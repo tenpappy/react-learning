@@ -44,6 +44,11 @@ export const Calculator = () => {
   const onClickNum = (e) => {
     console.log(e.target.textContent);
     setOutputMessage(e.target.textContent);
+    //入力された文字
+    // const input = e.target.textContent;
+
+    // const disabled=
+
     // //保持している数字
     // const inputNumList = [];
     // //保持している演算子
@@ -54,8 +59,6 @@ export const Calculator = () => {
     // const numList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     // //演算子
     // const culcList = ["+", "-", "×", "÷"];
-    // //入力された文字
-    // const input = e.target.textContent;
 
     // if (input === "RESET") {
     //   //RESETが押されたら全て初期化
@@ -90,6 +93,7 @@ export const Calculator = () => {
           disableElevation
           className={classes.button}
           onClick={onClickNum}
+          // disabled={disabled}
         >
           7
         </Button>

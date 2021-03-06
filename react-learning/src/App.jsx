@@ -22,6 +22,7 @@ export const App = () => {
           <Route exact path="/" component={Top} />
           <Route exact path="/Practice" component={Practice} />
           <Route exact path="/Calculator" component={Calculator} />
+          <Route component={Top} />
         </Switch>
         <hr />
         <Link to="/">Back To Top</Link>
