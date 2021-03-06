@@ -42,12 +42,14 @@ export const Top = () => {
   //作品リスト
   const worksList = {
     work1: {
-      path: "/react-learning/Practice",
+      // path: "/react-learning/Practice",
+      path: "/Practice",
       name: "練習アプリ",
       description: ["練習用の画面です"],
     },
     work2: {
-      path: "/react-learning/Calculator",
+      // path: "/react-learning/Calculator",
+      path: "/Calculator",
       name: "電卓アプリ（作成中）",
       description: ["シンプルな電卓アプリです。\n四則演算ができます。"],
     },
