@@ -6,9 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 const outputArea = {
   margin: "2px",
   paddingRight: "5px",
-  width: "261px",
+  width: "259px",
   height: "50px",
-  backgroundColor: "rgba(0, 0, 0, 0.12)",
+  borderStyle: "solid",
+  borderWidth: "1px",
+  borderColor: "#303f9f",
   borderRadius: "4px",
   textAlign: "right",
   lineHeight: "50px",
@@ -39,51 +41,114 @@ const useStyles = makeStyles({
 
 export const Calculator = () => {
   const classes = useStyles();
+  //計算対象（演算における前の値）
+  const [beforeNum, setBeforeNum] = useState("");
+  const [afterNum, setAfterNum] = useState();
+  //演算子
+  const [operator, setOperator] = useState("");
+  //電卓表示
   const [outputMessage, setOutputMessage] = useState("");
+  //演算子の活性非活性コントロール
+  const [operatorDisabled, setOperatorDisabled] = useState(true);
+  //小数点の活性非活性コントロール
+  const [decimalPointDisabled, setDecimalPointDisabled] = useState(true);
 
-  const onClickNum = (e) => {
-    console.log(e.target.textContent);
-    setOutputMessage(e.target.textContent);
-    //入力された文字
-    // const input = e.target.textContent;
+  const operatorMaster = ["+", "-", "÷", "×"];
 
-    // const disabled=
-
-    // //保持している数字
-    // const inputNumList = [];
-    // //保持している演算子
-    // const inputCulcList = [];
-    // //保持している最後の文字
-    // const lastStr = outputMessage.slice(-1);
-    // //数字
-    // const numList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-    // //演算子
-    // const culcList = ["+", "-", "×", "÷"];
-
-    // if (input === "RESET") {
-    //   //RESETが押されたら全て初期化
-    //   inputNumList = [];
-    //   inputCulcList = [];
-    //   setOutputMessage("");
-    // } else if (input === "=") {
-    //   //「=」が押されたら計算結果を表示
-    //   setOutputMessage();
-
-    //   //計算して結果を表示する
-    // } else if (input.includes(numList) && lastStr.includes(culcList)) {
-    //   //入力が数字で且つ最後の文字列が演算子であれば配列に追加
-    // }
+  //リセットボタン押下
+  const onClickReset = () => {
+    console.log("★リセットボタン★");
+    setAfterNum();
+    setBeforeNum("");
+    setOperator("");
+    setOutputMessage("");
+    setOperatorDisabled(true);
+    setDecimalPointDisabled(true);
   };
+
+  //数字ボタン押下
+  const onClickNum = (e) => {
+    console.log("★数字ボタン★");
+    //入力セット
+    const input = e.target.textContent;
+    console.log(outputMessage);
+    //前回入力が演算子であれば
+    if (operatorMaster.includes(outputMessage)) {
+      console.log("true");
+      //演算子活性
+      setOperatorDisabled(false);
+      //入力値を表示値にセット
+      setOutputMessage(input);
+      //元の表示値を計算対象としてセット
+      setAfterNum(beforeNum);
+      setBeforeNum(input);
+    } else {
+      console.log("else");
+      //演算子活性
+      setOperatorDisabled(false);
+      //入力値を表示値にセット
+      setOutputMessage(beforeNum + input);
+      //元の表示値を計算対象としてセット
+      setBeforeNum(beforeNum + input);
+    }
+  };
+
+  //演算子（+-×÷）ボタン押下
+  const onClickOperator = (e) => {
+    console.log("★演算子ボタン★");
+
+    //入力セット
+    const input = e.target.textContent;
+    console.log("textContent：" + input);
+
+    //演算子非活性
+    setOperatorDisabled(true);
+    setOperator(input);
+    setOutputMessage(input);
+    console.log("outputMessage：" + outputMessage);
+  };
+
+  //イコールボタン押下
+  const onClickEqual = (e) => {
+    console.log("★イコールボタン★");
+    setOperatorDisabled(false);
+    setOperator("");
+    //TODO:なぜこれでうまくいく？setOutputMessageが後に計算される…？
+    // setAfterNum(0);
+    // setBeforeNum(0);
+    switch (operator) {
+      //足し算
+      case "+":
+        setOutputMessage(Number(afterNum) + Number(beforeNum));
+        setBeforeNum(Number(afterNum) + Number(beforeNum));
+        break;
+      //引き算
+      case "-":
+        setOutputMessage(Number(afterNum) - Number(beforeNum));
+        setBeforeNum(Number(afterNum) - Number(beforeNum));
+        break;
+      //掛け算
+      case "×":
+        setOutputMessage(Number(afterNum) * Number(beforeNum));
+        setBeforeNum(Number(afterNum) * Number(beforeNum));
+        break;
+      //割り算
+      case "÷":
+        setOutputMessage(Number(afterNum) / Number(beforeNum));
+        setBeforeNum(Number(afterNum) / Number(beforeNum));
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <h1>電卓アプリ（作成中）</h1>
       <ul>
         <li>Reactで実装</li>
         <li>ボタンだけMaterial-UI使ってみた</li>
-        <li>ボタンクリック後に値を渡すところまで完了</li>
-        <li>
-          全てを一旦文字列で受け取ってあとで計算するのが不可（eval使用不可）だったため、別の方法検討中
-        </li>
+        <li>小数点は気が向いたら…やろう。。</li>
       </ul>
       <div style={outputArea}>{outputMessage}</div>
       <div style={flex}>
@@ -119,7 +184,7 @@ export const Calculator = () => {
           color="primary"
           disableElevation
           className={classes.button2}
-          onClick={onClickNum}
+          onClick={onClickReset}
         >
           RESET
         </Button>
@@ -157,7 +222,8 @@ export const Calculator = () => {
           color="primary"
           disableElevation
           className={classes.button}
-          onClick={onClickNum}
+          onClick={onClickOperator}
+          disabled={operatorDisabled}
         >
           ×
         </Button>
@@ -166,7 +232,8 @@ export const Calculator = () => {
           color="primary"
           disableElevation
           className={classes.button}
-          onClick={onClickNum}
+          onClick={onClickOperator}
+          disabled={operatorDisabled}
         >
           ÷
         </Button>
@@ -204,7 +271,8 @@ export const Calculator = () => {
           color="primary"
           disableElevation
           className={classes.button}
-          onClick={onClickNum}
+          onClick={onClickOperator}
+          disabled={operatorDisabled}
         >
           +
         </Button>
@@ -213,7 +281,8 @@ export const Calculator = () => {
           color="primary"
           disableElevation
           className={classes.button}
-          onClick={onClickNum}
+          onClick={onClickOperator}
+          disabled={operatorDisabled}
         >
           -
         </Button>
@@ -225,6 +294,7 @@ export const Calculator = () => {
           disableElevation
           className={classes.button}
           onClick={onClickNum}
+          disabled={!beforeNum}
         >
           0
         </Button>
@@ -234,6 +304,7 @@ export const Calculator = () => {
           disableElevation
           className={classes.button}
           onClick={onClickNum}
+          disabled={!beforeNum}
         >
           00
         </Button>
@@ -243,6 +314,7 @@ export const Calculator = () => {
           disableElevation
           className={classes.button}
           onClick={onClickNum}
+          disabled={decimalPointDisabled}
         >
           .
         </Button>
@@ -251,7 +323,7 @@ export const Calculator = () => {
           color="primary"
           disableElevation
           className={classes.button2}
-          onClick={onClickNum}
+          onClick={onClickEqual}
         >
           ＝
         </Button>
