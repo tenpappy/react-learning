@@ -43,6 +43,7 @@ export const Calculator = () => {
   const classes = useStyles();
   //計算対象（演算における前の値）
   const [beforeNum, setBeforeNum] = useState("");
+  //計算対象（演算における後の値）
   const [afterNum, setAfterNum] = useState();
   //演算子
   const [operator, setOperator] = useState("");
@@ -52,7 +53,7 @@ export const Calculator = () => {
   const [operatorDisabled, setOperatorDisabled] = useState(true);
   //小数点の活性非活性コントロール
   const [decimalPointDisabled, setDecimalPointDisabled] = useState(true);
-
+  //演算子マスタ
   const operatorMaster = ["+", "-", "÷", "×"];
 
   //リセットボタン押下
@@ -71,24 +72,21 @@ export const Calculator = () => {
     console.log("★数字ボタン★");
     //入力セット
     const input = e.target.textContent;
-    console.log(outputMessage);
     //前回入力が演算子であれば
     if (operatorMaster.includes(outputMessage)) {
-      console.log("true");
       //演算子活性
       setOperatorDisabled(false);
       //入力値を表示値にセット
       setOutputMessage(input);
-      //元の表示値を計算対象としてセット
+      //計算対象となる値を前→後に変更
       setAfterNum(beforeNum);
       setBeforeNum(input);
     } else {
-      console.log("else");
       //演算子活性
       setOperatorDisabled(false);
       //入力値を表示値にセット
       setOutputMessage(beforeNum + input);
-      //元の表示値を計算対象としてセット
+      //2桁目以上を想定したセット
       setBeforeNum(beforeNum + input);
     }
   };
@@ -96,16 +94,12 @@ export const Calculator = () => {
   //演算子（+-×÷）ボタン押下
   const onClickOperator = (e) => {
     console.log("★演算子ボタン★");
-
     //入力セット
     const input = e.target.textContent;
-    console.log("textContent：" + input);
-
     //演算子非活性
     setOperatorDisabled(true);
     setOperator(input);
     setOutputMessage(input);
-    console.log("outputMessage：" + outputMessage);
   };
 
   //イコールボタン押下
@@ -113,9 +107,6 @@ export const Calculator = () => {
     console.log("★イコールボタン★");
     setOperatorDisabled(false);
     setOperator("");
-    //TODO:なぜこれでうまくいく？setOutputMessageが後に計算される…？
-    // setAfterNum(0);
-    // setBeforeNum(0);
     switch (operator) {
       //足し算
       case "+":
