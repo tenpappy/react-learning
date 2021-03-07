@@ -144,7 +144,7 @@ export const Calculator = () => {
 
   return (
     <>
-      <h1>電卓アプリ（作成中）</h1>
+      <h1>電卓アプリ</h1>
       <ul>
         <li>Reactで実装</li>
         <li>ボタンだけMaterial-UI使ってみた</li>
