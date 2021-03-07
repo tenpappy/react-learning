@@ -58,7 +58,7 @@ export const Calculator = () => {
 
   //リセットボタン押下
   const onClickReset = () => {
-    console.log("★リセットボタン★");
+    //全て初期化
     setAfterNum();
     setBeforeNum("");
     setOperator("");
@@ -69,7 +69,6 @@ export const Calculator = () => {
 
   //数字ボタン押下
   const onClickNum = (e) => {
-    console.log("★数字ボタン★");
     //入力セット
     const input = e.target.textContent;
     //前回入力が演算子であれば
@@ -93,12 +92,13 @@ export const Calculator = () => {
 
   //演算子（+-×÷）ボタン押下
   const onClickOperator = (e) => {
-    console.log("★演算子ボタン★");
     //入力セット
     const input = e.target.textContent;
     //演算子非活性
     setOperatorDisabled(true);
+    //演算子をセット
     setOperator(input);
+    //入力値を表示値にセット
     setOutputMessage(input);
   };
 
